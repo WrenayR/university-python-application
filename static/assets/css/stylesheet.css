@@ -1,0 +1,327 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/Montserrat-Bold.ttf');
+}
+@font-face {
+  font-family: 'robotoMedium';
+  src: url('../assets/fonts/Roboto-Medium.ttf');
+}
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../assets/fonts/Roboto-Regular.ttf');
+}
+html,body{
+  overflow-x: hidden;
+  margin: 0;
+  height: 100%;
+  background: #EEEEEE;
+}
+
+.header,.footer {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  z-index: 10;
+  background: #009FBD;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.03);
+  padding-inline: 20px;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*---------------------------------------Main Content---------------------------*/
+/*------------dashboard-content------------*/
+.dashboard-content {
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  width: calc(100vw - 320px);
+}
+.main-content{
+  margin-top: 60px;
+}
+.form-container {
+  width: 80%;
+  margin: 30px auto;
+}
+/*-----------Sidebar----------------*/
+.main-content .sidebar {
+  width: 25%;
+  height: calc(100vh - 120px);
+  transition: transform 250ms ease-in-out;
+  padding-inline: 10px;
+  overflow-y: auto;
+  border-right:1px solid lightgray;
+}
+/*-Sidebar-tab-*/
+.sidebar ul.nav-pills li{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.sidebar ul.nav-pills li .nav-link{
+  color: #002A29;
+  font-weight: bold;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+  color: #0F79D8 !important;
+}
+/*--------------Footer------------*/
+.footer-nav ul li{
+  display: inline-block;
+  margin-inline: 10px;
+}
+.footer-nav ul li a{
+  font-weight: 400;
+  font-size: 16px;
+  color: #3C3C3C;
+  text-decoration: none;
+}
+
+/*---------Responsive Menu For Mobile Screen-----*/
+#openSidebarMenu:checked ~ #sidebarMenu {
+  transform: translateX(0);
+  z-index: 999;
+}
+#openSidebarMenu:checked ~ .dashboard-content{
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  pointer-events: none;
+}
+input#openSidebarMenu{
+  display: none;
+}
+.toggle-icon {
+  width: 35px;
+  height: 32px;
+  background: #008159;
+  position: absolute;
+  z-index: 99;
+  top: 15px;
+  right: 30px;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: none;
+  border-radius: 10px;
+}
+.bar1,.bar2,.bar3 {
+  width: 22px;
+  margin-top: 5px;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+#openSidebarMenu:checked ~ .toggle-icon > .bar1 {
+  opacity: 0;
+}
+#openSidebarMenu:checked ~ .toggle-icon > .bar2 {
+  transform: rotate(135deg);
+  margin-top: 7px;
+}
+#openSidebarMenu:checked ~ .toggle-icon > .bar3 {
+  transform: rotate(-135deg);
+  margin-top: -3px;
+}
+
+
+.change .bar1 {
+transform: translate(0, 11px) rotate(-45deg);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+transform: translate(0, -11px) rotate(45deg);
+}
+.user-activities{
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.user-activities ul li{
+  padding-block: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  list-style: none;
+}
+.user-activities ul li:last-child{
+  border-bottom: none;
+}
+.user-activities ul a{
+  text-decoration: none;
+  color: #002A29;
+}
+.user-icon p {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #008159;
+  padding-block: 5px;
+  color: #fff;
+  margin-inline: auto;
+}
+/*   Edit-form   */
+.form-control:focus,button.btn:focus {
+  box-shadow:none;
+}
+
+.input-field {
+  height: 50px;
+  margin: 15px 0px;
+}
+.input-group span i {
+  color: #0F79D8;
+}
+
+/*   LogIn  */
+.rgtside-login h4 {
+  width: 60%;
+  font-family: 'Montserrat';
+  transform: translate(30px, 40px);
+  font-size: 32px;
+  color: #FFFFFF;
+}
+h4.logo {
+  margin: 45px 0px;
+}
+.logIn-form {
+  margin: 0px 30px;
+}
+.logIn-form h4 {
+  font-size: 32px;
+  margin: 30px 0px;
+  font-family: 'robotoMedium';
+  text-align: center;
+}
+.logIn-form p{
+  color: #707070;
+  font-family: 'Roboto-Regular';
+  font-size: 14px;
+}
+.logIn-form p a{
+  text-decoration: none;
+}
+
+
+
+
+/*   Forggot Password  */
+.rgtside-login,.forgot-password{
+  background-image: url('../assets/images/Group\ 13616.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.frgt-pswrd {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.forgtPsw{
+  width: 50%;
+  background-color: #ffffff;
+  padding: 30px 30px;
+}
+.forgtPsw form {
+  width: 50%;
+  margin: 0 auto;
+}
+.forgtPsw span.done i {
+  background-color: #0d6efd;
+  padding: 12px 15px;
+  color: #fff;
+  border-radius: 34px;
+  font-size: 35px;
+}
+.forgtPsw h4 {
+  margin-top: 60px;
+  color: #0d6efd;
+  font-family: 'robotoMedium';
+  font-size: 32px;
+}
+.forgtPsw p {
+  color: #707070;
+  font-size: 14px;
+  margin: 0px 30px;
+}
+.forgot-overlay {
+  position: absolute;
+  bottom: 25%;
+  left: 40%;
+}
+.forgot-overlay img {
+  width: 100%;
+  display: block;
+}
+.bootom-img img {
+  margin-top: 120px;
+}
+
+
+.order-sum {
+  background-color: #fff;
+  padding: 0px 30px;
+}
+@media only screen and (max-width:1199px){
+  .rgtside-login h4{font-size: 27px;}
+
+  .forgot-overlay {bottom: 27%;left: 38%;}
+  .forgtPsw h4 { font-size: 28px;}
+}
+
+@media only screen and (max-width:991px){
+  .input-group-append button i,.filter button i {font-size: 14px;}
+.rgtside-login h4 {width: 90%;font-size: 22px;padding: 60px 0px 0px 60px;}
+.bootom-img img {width: 350px;margin: 173px 0px 0px 10px;}
+.forgot-overlay {bottom: 35%;left: 40%;}
+.forgot-overlay img {width: 150px;}
+.forgtPsw h4 {font-size: 25px;}
+.forgtPsw p {font-size: 13px;}
+.rgtside-login h4 {transform: translate(0, 0);}
+}
+@media only screen and (max-width:767px){
+  .toggle-icon{display: block;padding-block: 2px;padding-inline: 6px;}
+  #sidebarMenu {margin-top: 60px;position: absolute;left: 0;top: 0;transform: translateX(-100%);}
+  .dashboard-content {height: calc(100vh - 120px);padding-block: 20px;overflow-y: auto;width: 100%;}
+  .main-content .sidebar{width: 300px;}
+  .input-group input {font-size: 13px;padding: 0px 20px;}
+  .input-group-append button i,.filter button i{font-size: 13px;}
+  .rgtside-login h4 { font-size: 30px;}
+  .forgtPsw { width: 70%;}
+  .forgtPsw {padding: 30px 20px;}
+  .forgtPsw p{font-size: 12px; margin: 0px 20px;}
+  .forgot-overlay img {width: 150px;}
+  .forgot-overlay {bottom: 37%;left: 37%;}
+}
+@media only screen and (max-width:575px){
+  .input-group input {font-size: 13px;padding: 0px 20px;}
+  .input-group-append button i,.filter button i {font-size: 13px;}
+   .rgtside-login h4 {font-size: 22px;}
+   .logIn-form h4 {font-size: 25px;}
+
+   .forgtPsw {padding: 30px 0px;}
+   .forgtPsw { width: 70%;}
+   .forgtPsw h4 {margin-top: 10px;font-size: 20px;}
+   .forgot-overlay {bottom: 40%;left: 36%;}
+   .forgot-overlay img {width: 100px;}
+   .forgtPsw p { margin: 0px 10px;}
+   .forgtPsw form {width: 70%;}
+
+   .rgtside-login h4 { padding: 10px 0px 0px 10px;}
+
+}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %} {{ role }} Login {% endblock %}
+
+{% block body %}
+    <div class="container p-5">
+        <div class="row">
+             <form method="POST" action="{{ url_for('updateCustomer', cus_id=customer.id) }}">
+                  <div class="mb-3">
+                      <label class="form-label">First Name</label>
+                      <input type="text" id="fname" name="fname" class="form-control" value="{{ customer.first_name }}" pattern="^[a-zA-Z]+$" title="Alphabets only">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Last Name</label>
+                      <input type="text" id="lname" name="lname" class="form-control" value="{{ customer.last_name }}" pattern="^[a-zA-Z]+$" title="Alphabets only">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Email address</label>
+                      <input type="email" id="email" name="email" class="form-control" value="{{ customer.email }}">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Account Number</label>
+                      <input type="number" class="form-control" id="account" name="account" value="{{ customer.account_number }}" min="0">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Sort Code</label>
+                      <input type="number" class="form-control" id="scode" name="scode" value="{{ customer.sort_code }}" min="0">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label">Balance</label>
+                      <input type="number" class="form-control" id="balance" name="balance" value="{{ customer.balance }}" min="0">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  {% if user.role =='admin' %}
+                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Delete
+                </button>
+                 {% endif %}
+              </form>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to delete record of "{{ customer.first_name }} {{ customer.last_name }}"?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ url_for('deleteCustomer',cus_id=customer.id)  }}"><button type="button" class="btn btn-danger">Yes</button></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<script>
+        alertMessage=document.querySelector(".alert")
+        cross=document.querySelector(".fas")
+
+        cross.addEventListener('click', function (){
+            alertMessage.style.display='none';
+        })
+</script>

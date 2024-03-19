@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %} {{ role }} Login {% endblock %}
+{% block body %}
+    <main>
+        <div class="container-xxl p-0">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-8" style="background-image: url({{ url_for('static',filename='assets/images/loginbg.png') }}) ">
+                    <div class="rgtside-login">
+                        <div class="bootom-img">
+                            <img src="{{ url_for('static', filename='assets/images/Group 13647.png') }}" class="img-flui" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 align-self-center">
+                    <div class="logIn-form">
+                        <h4 class="text-primary">{{ role }} Login</h4>
+                        <form method="POST" action="/login">
+{#                            <div class="input-group input-field">#}
+{#                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>#}
+{#                                <select class="form-select form-select-lg" name="" id="">#}
+{#                                    <option selected>admin</option>#}
+{#                                    <option value="">student</option>#}
+{#                                </select>#}
+{#                            </div>#}
+                            <div class="input-group input-field">
+                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                <input type="text" class="form-control" name="role" id="role" value="{{ role }}" style="display: none;">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                            </div>
+                            <div class="input-group input-field">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                <input name="password" type="password" value="" class="input form-control border-end-0" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                                <span class="input-group-text bg-body" onclick="password_show_hide();">
+                                    <i class="fas fa-eye" id="show_eye"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                </span>
+                            </div>
+{#                            <p class="text-end"><a href="ForgotPassword.html">Forgot Password</a></p>#}
+                            <button type="submit" class="btn btn-primary w-100">LOGIN</button>
+
+                            {% if role != 'Admin' %}
+                            <p class="text-center my-3">OR</p>
+                            <p class="text-center mt-4">Don't have an account ? <a href="/register">SIGN UP</a></p>
+                            {% endif %}
+{#                            {% with messages = get_flashed_messages() %}#}
+{#                                {% if messages %}#}
+{#                                <div class="alert alert-primary" role="alert">#}
+{#                                            {{ message }}#}
+{#                                </div>#}
+{#                                {% endif %}#}
+{#                            {% endwith %}#}
+                            {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-primary m-4 alert-message text-center" style="display: flex; align-items: center; justify-content: space-between;" role="alert">
+                                <div>{{ message }}</div>
+{#                                <i class="fas fa-times" style="cursor: pointer;"></i>#}
+                           </div>
+                          {% endfor %}
+                      {% endif %}
+                {% endwith %}
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+ {% endblock %}
+{% block extraScript %}
+    <script>
+            alertMessage=document.querySelector(".alert")
+            cross=document.querySelector(".fas")
+
+            cross.addEventListener('click', function (){
+                alertMessage.style.display='none';
+            })
+    </script>
+{% endblock %}

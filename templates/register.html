@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+{% block body %}
+    <main>
+        <div class="container-xxl p-0">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-8" style="background-image: url({{ url_for('static',filename='assets/images/loginbg.png') }}) ">
+                    <div class="rgtside-login">
+
+                        <div class="bootom-img">
+                            <img src="{{ url_for('static', filename='assets/images/Group 13647.png') }}" class="img-flui" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4 align-self-center">
+                    <div class="logIn-form">
+                        <h4 class="text-primary">Sign up</h4>
+                        <form method="POST" action="/register">
+                            <div class="input-group input-field">
+                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                <input type="text" class="form-control" name="username" id="fname" placeholder="Username" pattern="^[a-zA-Z0-9_\.]+$" title="Username can be aplhanumeric and can include only underscore and dot">
+                            </div>
+                            <div class="input-group input-field">
+                                <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                            </div>
+                            <div class="input-group input-field">
+                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-lock"></i></span>
+                                <input name="password" type="password" value="" class="input form-control border-end-0" id="password" placeholder="password" required="true" aria-label="password" aria-describedby="basic-addon1" />
+                                <span class="input-group-text bg-body" onclick="password_show_hide();">
+                                    <i class="fas fa-eye" id="show_eye"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                </span>
+                            </div>
+                            <div class="input-group input-field">
+                                <span class="input-group-text"><i class="fa-solid fa-lock"></i></span>
+                                <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password" id="Confirm Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">SIGN UP</button>
+
+                            <p class="text-center my-3">OR</p> <p class="text-center mt-4">Already have an account ? <a href="/login">LOG IN</a></p>
+                        </form>
+                        {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                          {% for message in messages %}
+                            <div class="alert alert-primary m-4 alert-message" style="display: flex; align-items: center; justify-content: space-between;" role="alert">
+                                <div>{{ message }}</div>
+                                <i class="fas fa-times" style="cursor: pointer;"></i>
+                           </div>
+                          {% endfor %}
+                      {% endif %}
+
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+<script>
+        alertMessage=document.querySelector(".alert")
+        cross=document.querySelector(".fas")
+
+        cross.addEventListener('click', function (){
+            alertMessage.style.display='none';
+        })
+</script>
