@@ -6,14 +6,6 @@ from flask_login import UserMixin
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import db
-# db = SQLAlchemy()  # db intitialized here
-# app = Flask(__name__)
-# app.config['SECRET_KEY'] = 'secret key'
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db.init_app(app)
-# app.app_context().push()
-# db.create_all()
 
 class User(UserMixin, db.Model):
 

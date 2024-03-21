@@ -179,7 +179,6 @@ def addCustomer():
         response = make_response(redirect(url_for('index')))
         response.data = b'Unauth'
         return response
-        # return redirect(url_for('index'))
     customer = Customer(first_name=request.form['fname'], last_name=request.form['lname'], email=request.form['email'],
                         account_number=request.form['account'], balance=request.form['balance'],
                         user_id=current_user.id, sort_code=request.form['scode'])
@@ -190,7 +189,6 @@ def addCustomer():
     response = make_response(redirect(url_for('index')))
     response.data = b'Customer Added'
     return response
-    # return redirect(url_for('index'))
 
 
 @app.route('/add-user', methods=['POST'])
