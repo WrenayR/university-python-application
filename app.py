@@ -1,5 +1,3 @@
-import pdb
-
 from flask import render_template, flash, redirect, url_for, make_response
 from flask import request
 from flask_login import login_required, login_user, logout_user, LoginManager, current_user
@@ -8,6 +6,7 @@ from flask_migrate import Migrate
 from models import User, Customer
 from flask import Flask
 from database import db
+from sqlalchemy import text
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret key'
@@ -64,14 +63,16 @@ def register():
         email = request.form['email']
 
         if password != confirm_password:
-            flash('Password Does not Matched.')
+            flash('Password Does not Match.')
             response = make_response(redirect(url_for('register')))
-            response.data = b'Password Does not Matched.'
+            response.data = b'Password Does not Match.'
             return response
-
-            # return redirect(url_for('register'),Response='Password Does not Matched.')
-            # return redirect(url_for('register'),Response='Password Does not Matched.')
-            # return render_template('register.html', flash=flash('Password Does not Matched.'))
+        
+        if len(password) < 8:
+            flash('Password Does not meet the required length')
+            response = make_response(redirect(url_for('register')))
+            response.data = b'Password Does not meet the required length'
+            return response
 
         user_by_username = User.query.filter_by(username=username).first()
         user_by_email = User.query.filter_by(email=email).first()
@@ -101,22 +102,20 @@ def register():
             response = make_response(redirect(url_for('login')))
             response.data = b'Account created successfully.'
             return response
-            # return redirect(url_for('login'))
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'GET':
         if current_user.is_authenticated:
-            flash("You Are already Logged in.")
+            flash("You are already logged in.")
             return redirect(url_for('index'))
         return render_template('login.html', role='User')
 
     if request.method == 'POST':
-
         username = request.form['username']
         password = request.form['password']
         role = request.form['role']
+
         user = User.query.filter_by(username=username).first()
 
         if not user or not user.check_password(password):
@@ -126,12 +125,10 @@ def login():
                 response = make_response(redirect(url_for('admin')))
                 response.data = b'Invalid username or password.'
                 return response
-                # return redirect(url_for('admin'))
             else:
                 response = make_response(redirect(url_for('login')))
                 response.data = b'Invalid username or password.'
                 return response
-                # return redirect(url_for('login'))
 
         login_user(user)
 
@@ -139,7 +136,6 @@ def login():
         response = make_response(redirect(url_for('index')))
         response.data = b'Logged in successfully.'
         return response
-        # return redirect(url_for('index'))
 
 
 @app.route('/admin', methods=['POST', 'GET'])
@@ -157,7 +153,7 @@ def resetPassword():
     new_pass = request.form['npass']
     confirm_pass = request.form['cnpass']
     if current_user.check_password(current_pass):
-        if new_pass == confirm_pass:
+        if new_pass == confirm_pass and len(new_pass) < 8:
             current_user.set_password(confirm_pass)
             db.session.commit()
             flash("Password Updated.")
