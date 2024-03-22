@@ -3,16 +3,6 @@ from models import Customer, User
 from app import db
 
 
-
-# @pytest.fixture
-# def app():
-#     yield flask_app
-
-
-# @pytest.fixture
-# def client(app):
-#     return app.test_client()
-
 def test_login_page(client):
     response = client.get('/login')
     print(response.data)
@@ -25,8 +15,6 @@ def test_login_form_valid_user(client):
     user.set_password('password')
     db.session.add(user)
     db.session.commit()
-    # app.app_context().push()
-    # client = app.test_client()
     try:
         response = client.post('/login', data={
             'username': 'testuser5432',
@@ -45,8 +33,6 @@ def test_login_form_valid_user(client):
 
 
 def test_login_form_invalid_user(client):
-    # app.app_context().push()
-    # client = app.test_client()
     user = User(username='testuser98765', email='testuser98765@example.com')
     user.set_password('password')
     db.session.add(user)
@@ -70,8 +56,6 @@ def test_login_form_invalid_user(client):
 
 
 def test_login_form_wrong_password(client):
-    # app.app_context().push()
-    # client = app.test_client()
 
     user = User(username='testuser543645', email='testuser543645@example.com')
     user.set_password('password')
